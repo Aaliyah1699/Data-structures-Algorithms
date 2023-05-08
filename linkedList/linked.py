@@ -102,3 +102,23 @@ class LinkedList:
             current_node = current_node.next_node
         string += "null"
         return string
+    # insert at given index
+    def insert_at(self, index, value):
+        if index < 0 or index > self.size:
+            return 
+        if index == 0:
+            self.prepend(value)
+        elif index == self.size:
+            self.append(value)
+        else:
+            new_node = Node(value)
+            current_node = self.head
+            previous_node = None
+            current_index = 0
+            while current_index < index:
+                previous_node = current_node
+                current_node = current_node.next_node
+                current_index += 1
+            previous_node.next_node = new_node
+            new_node.next_node = current_node
+            self.size += 1
