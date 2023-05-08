@@ -53,4 +53,26 @@ class LinkedList {
     }
     return currentNode;
   }
+
+  // Remove node at a given index
+  pop() {
+    if (this.head === null) {
+      return null;
+    }
+    let currentNode = this.head;
+    let previousNode = null;
+    while (currentNode.nextNode !== null) {
+      previousNode = currentNode;
+      currentNode = currentNode.nextNode;
+    }
+    if (previousNode === null) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      previousNode.nextNode = null;
+      this.tail = previousNode;
+    }
+    this.size--;
+    return currentNode.value;
+  }
 }
