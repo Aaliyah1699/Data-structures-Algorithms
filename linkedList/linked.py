@@ -100,4 +100,5 @@ class LinkedList:
         while current_node is not None:
             string += str(current_node.value) + " "
             current_node = current_node.next_node
+        string += "null"
         return string
