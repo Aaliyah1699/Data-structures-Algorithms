@@ -168,3 +168,45 @@ class LinkedList {
     this.size--;
   }
 }
+
+// test
+// Create a new LinkedList instance
+const list = new LinkedList();
+
+// Append nodes
+list.append(10);
+list.append(20);
+list.append(30);
+
+// Prepend nodes
+list.prepend(5);
+list.prepend(2);
+
+// Test size, head, and tail
+console.log("Size:", list.size); // Output: 5
+console.log("Head:", list.head.value); // Output: 2
+console.log("Tail:", list.tail.value); // Output: 30
+
+// Test at
+console.log("Node at index 2:", list.at(2).value); // Output: 10
+
+// Test pop
+console.log("Popped element:", list.pop()); // Output: 30
+
+// Test contains
+console.log("Contains 20:", list.contains(20)); // Output: true
+console.log("Contains 40:", list.contains(40)); // Output: false
+
+// Test find
+console.log("Index of 20:", list.find(20)); // Output: 2
+
+// Test toString
+console.log("LinkedList:", list.toString()); // Output: (2) -> (5) -> (10) -> (20) -> null
+
+// Test insertAt
+list.insertAt(15, 2);
+console.log("LinkedList after insertion:", list.toString()); // Output: (2) -> (5) -> (15) -> (10) -> (20) -> null
+
+// Test removeAt
+list.removeAt(3);
+console.log("LinkedList after removal:", list.toString()); // Output: (2) -> (5) -> (15) -> (20) -> null
