@@ -57,8 +57,8 @@ class LinkedList:
             current_index += 1
         return current_node
 
-    # Remove node at index
-    def pop(self, index):
+    # Remove node 
+    def pop(self):
         if self.head_node is None:
             return None
         popped_value = self.tail_node.value
