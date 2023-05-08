@@ -35,7 +35,7 @@ class LinkedList:
         self.size += 1
 
     # Size of the list
-    def size(self):
+    def get_size(self):
         return self.size
 
     # Return first node of list
@@ -146,3 +146,46 @@ class LinkedList:
             if index == self.size - 1:
                 self.tail = previous_node
             self.size -= 1
+
+# Test
+
+# Create a new LinkedList instance
+list = LinkedList()
+
+# Append nodes
+list.append(10)
+list.append(20)
+list.append(30)
+
+# Prepend nodes
+list.prepend(5)
+list.prepend(2)
+
+# Test size, head, and tail
+print("Size:", list.get_size())         # Output: 5
+print("Head:", list.head().value)   # Output: 2
+print("Tail:", list.tail().value)   # Output: 30
+
+# Test at
+print("Node at index 2:", list.at(2).value)   # Output: 10
+
+# Test pop
+print("Popped element:", list.pop())          # Output: 30
+
+# Test contains
+print("Contains 20:", list.contains(20))      # Output: True
+print("Contains 40:", list.contains(40))      # Output: False
+
+# Test find
+print("Index of 20:", list.find(20))          # Output: 2
+
+# Test toString
+print("LinkedList:", list.toString())         # Output: (2) -> (5) -> (10) -> (20) -> null
+
+# Test insertAt
+list.insertAt(15, 2)
+print("LinkedList after insertion:", list.toString())   # Output: (2) -> (5) -> (15) -> (10) -> (20) -> null
+
+# Test removeAt
+list.removeAt(3)
+print("LinkedList after removal:", list.toString())     # Output: (2) -> (5) -> (15) -> (20) -> null
