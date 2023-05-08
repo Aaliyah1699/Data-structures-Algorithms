@@ -181,12 +181,12 @@ print("Contains 40:", list.contains(40))      # Output: False
 print("Index of 20:", list.find(20))          # Output: 2
 
 # Test toString
-print("LinkedList:", list.toString())         # Output: (2) -> (5) -> (10) -> (20) -> null
+print("LinkedList:", list.to_string())         # Output: (2) -> (5) -> (10) -> (20) -> null
 
 # Test insertAt
 list.insertAt(15, 2)
-print("LinkedList after insertion:", list.toString())   # Output: (2) -> (5) -> (15) -> (10) -> (20) -> null
+print("LinkedList after insertion:", list.to_string())   # Output: (2) -> (5) -> (15) -> (10) -> (20) -> null
 
 # Test removeAt
 list.removeAt(3)
-print("LinkedList after removal:", list.toString())     # Output: (2) -> (5) -> (15) -> (20) -> null
+print("LinkedList after removal:", list.to_string())     # Output: (2) -> (5) -> (15) -> (20) -> null
