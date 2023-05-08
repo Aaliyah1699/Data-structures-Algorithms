@@ -8,16 +8,16 @@ class Node:
 # Linked List
 class LinkedList:
     def __init__(self):
-        self.head = None
+        self.head_node_node = None
         self.tail = None
         self.size = 0
 
     # Add node to the end of the list
     def append(self, value):
         new_node = Node(value)
-        if self.head is None:
-            self.head = new_node
-            self.tail = self.head
+        if self.head_node_node is None:
+            self.head_node = new_node
+            self.tail = self.head_node
         else:
             self.tail.next_node = new_node
             self.tail = self.tail.next_node
@@ -26,12 +26,12 @@ class LinkedList:
     # Add node to the beginning of the list
     def prepend(self, value):
         new_node = Node(value)
-        if self.head is None:
-            self.head = new_node
-            self.tail = self.head
+        if self.head_node is None:
+            self.head_node = new_node
+            self.tail = self.head_node
         else:
-            new_node.next_node = self.head
-            self.head = new_node
+            new_node.next_node = self.head_node
+            self.head_node = new_node
         self.size += 1
 
     # Size of the list
@@ -40,7 +40,7 @@ class LinkedList:
 
     # Return first node of list
     def head(self):
-        return self.head
+        return self.head_node
 
     # Return last node of list
     def tail(self):
@@ -50,7 +50,7 @@ class LinkedList:
     def at(self, index):
         if index < 0 or index >= self.size:
             return None
-        current_node = self.head
+        current_node = self.head_node
         current_index = 0
         while current_index < index:
             current_node = current_node.next_node
@@ -59,15 +59,15 @@ class LinkedList:
 
     # Remove node at index
     def remove(self, index):
-        if self.head is None:
+        if self.head_node is None:
             return None
-        current_node = self.head
+        current_node = self.head_node
         previous_node = None
         while current_node.next_node is not None:
             previous_node = current_node
             current_node = current_node.next_node
         if previous_node is None:
-            self.head = None
+            self.head_node = None
             self.tail = None
         else:
             previous_node.next_node = None
@@ -77,7 +77,7 @@ class LinkedList:
 
     # If value is in the list
     def contains(self, value):
-        current_node = self.head
+        current_node = self.head_node
         while current_node is not None:
             if current_node.value == value:
                 return True
@@ -86,7 +86,7 @@ class LinkedList:
 
     # find index of node containing value or null
     def find(self, value):
-        current_node = self.head
+        current_node = self.head_node
         current_index = 0
         while current_node is not None:
             if current_node.value == value:
@@ -98,7 +98,7 @@ class LinkedList:
     # Return string representation of list
     def to_string(self):
         string = ""
-        current_node = self.head
+        current_node = self.head_node
         while current_node is not None:
             string += str(current_node.value) + " "
             current_node = current_node.next_node
@@ -115,7 +115,7 @@ class LinkedList:
             self.append(value)
         else:
             new_node = Node(value)
-            current_node = self.head
+            current_node = self.head_node
             previous_node = None
             current_index = 0
             while current_index < index:
@@ -131,11 +131,11 @@ class LinkedList:
         if index < 0 or index >= self.size:
             return
         if index == 0:
-            self.head = self.head.next_node
+            self.head_node = self.head_node.next_node
             self.size == 1
             self.tail = None
         else:
-            current_node = self.head
+            current_node = self.head_node
             previous_node = None
             current_index = 0
             while current_index < index:
