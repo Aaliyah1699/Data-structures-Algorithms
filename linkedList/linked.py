@@ -38,3 +38,5 @@ class LinkedList:
         return self.size
     
     # Return first node of list
+    def head(self):
+        return self.head
