@@ -75,4 +75,16 @@ class LinkedList {
     this.size--;
     return currentNode.value;
   }
+
+  // Check if value exists in the list
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return true;
+      }
+      currentNode = currentNode.nextNode;
+    }
+    return false;
+  }
 }
