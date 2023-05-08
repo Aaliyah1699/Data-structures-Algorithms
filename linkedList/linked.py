@@ -1,8 +1,9 @@
-# Node 
+# Node
 class Node:
     def __init__(self, value):
         self.value = value
         self.next_node = None
+
 
 # Linked List
 class LinkedList:
@@ -36,15 +37,15 @@ class LinkedList:
     # Size of the list
     def size(self):
         return self.size
-    
+
     # Return first node of list
     def head(self):
         return self.head
-    
+
     # Return last node of list
     def tail(self):
         return self.tail
-    
+
     # Return node at index
     def at(self, index):
         if index < 0 or index >= self.size:
@@ -55,7 +56,7 @@ class LinkedList:
             current_node = current_node.next_node
             current_index += 1
         return current_node
-            
+
     # Remove node at index
     def remove(self, index):
         if self.head is None:
@@ -73,7 +74,7 @@ class LinkedList:
             self.tail = previous_node
         self.size -= 1
         return current_node.value
-    
+
     # If value is in the list
     def contains(self, value):
         current_node = self.head
@@ -82,7 +83,7 @@ class LinkedList:
                 return True
             current_node = current_node.next_node
         return False
-    
+
     # find index of node containing value or null
     def find(self, value):
         current_node = self.head
@@ -93,6 +94,7 @@ class LinkedList:
             current_node = current_node.next_node
             current_index += 1
         return None
+
     # Return string representation of list
     def to_string(self):
         string = ""
@@ -102,10 +104,11 @@ class LinkedList:
             current_node = current_node.next_node
         string += "null"
         return string
+
     # insert at given index
     def insert_at(self, index, value):
         if index < 0 or index > self.size:
-            return 
+            return
         if index == 0:
             self.prepend(value)
         elif index == self.size:
@@ -131,7 +134,7 @@ class LinkedList:
             self.head = self.head.next_node
             self.size == 1
             self.tail = None
-        else:   
+        else:
             current_node = self.head
             previous_node = None
             current_index = 0
