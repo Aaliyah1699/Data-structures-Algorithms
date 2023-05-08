@@ -122,3 +122,24 @@ class LinkedList:
             previous_node.next_node = new_node
             new_node.next_node = current_node
             self.size += 1
+
+    # remove at given index
+    def remove_at(self, index):
+        if index < 0 or index >= self.size:
+            return
+        if index == 0:
+            self.head = self.head.next_node
+            self.size == 1
+            self.tail = None
+        else:   
+            current_node = self.head
+            previous_node = None
+            current_index = 0
+            while current_index < index:
+                previous_node = current_node
+                current_node = current_node.next_node
+                current_index += 1
+            previous_node.next_node = current_node.next_node
+            if index == self.size - 1:
+                self.tail = previous_node
+            self.size -= 1
