@@ -102,6 +102,18 @@ class LinkedList {
     return null;
   }
 
+  // list objects as strings
+  toString() {
+    let result = "";
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      result += `${currentNode.value} ->`;
+      currentNode = currentNode.nextNode;
+    }
+    result += "null";
+    return result;
+  }
+
   // insert a node at a given index
   insertAt(index, value) {
     if (index < 0 || index >= this.size) {
