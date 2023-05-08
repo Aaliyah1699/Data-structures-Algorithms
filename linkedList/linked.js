@@ -101,4 +101,30 @@ class LinkedList {
     }
     return null;
   }
+
+  // insert a node at a given index
+  insertAt(index, value) {
+    if (index < 0 || index >= this.size) {
+      return;
+    }
+    if (index === 0) {
+      this.prepend(value);
+    } else if (index === this.size) {
+      this.append(value);
+    } else {
+      const newNode = new Node(value);
+      let currentNode = this.head;
+      let previousNode = null;
+      let currentIndex = 0;
+
+      while (currentIndex < index) {
+        previousNode = currentNode;
+        currentNode = currentNode.nextNode;
+        currentIndex++;
+      }
+      previousNode.nextNode = newNode;
+      newNode.nextNode = currentNode;
+      this.size++;
+    }
+  }
 }
