@@ -56,3 +56,20 @@ class LinkedList:
             current_index += 1
         return current_node
             
+    # Remove node at index
+    def remove(self, index):
+        if self.head is None:
+            return None
+        current_node = self.head
+        previous_node = None
+        while current_node.next_node is not None:
+            previous_node = current_node
+            current_node = current_node.next_node
+        if previous_node is None:
+            self.head = None
+            self.tail = None
+        else:
+            previous_node.next_node = None
+            self.tail = previous_node
+        self.size -= 1
+        return current_node.value
