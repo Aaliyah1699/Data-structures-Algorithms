@@ -133,8 +133,9 @@ class LinkedList:
             return
         if index == 0:
             self.head_node = self.head_node.next_node
-            self.size == 1
-            self.tail_node = None
+            self.size -= 1
+            if self.size == 0:
+                self.tail_node = None
         else:
             current_node = self.head_node
             previous_node = None
