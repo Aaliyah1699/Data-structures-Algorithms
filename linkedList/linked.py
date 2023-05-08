@@ -83,3 +83,14 @@ class LinkedList:
             current_node = current_node.next_node
         return False
     
+    # find index of node containing value or null
+    def find(self, value):
+        current_node = self.head
+        current_index = 0
+        while current_node is not None:
+            if current_node.value == value:
+                return current_index
+            current_node = current_node.next_node
+            current_index += 1
+        return None
+    
