@@ -58,22 +58,23 @@ class LinkedList:
         return current_node
 
     # Remove node at index
-    def remove(self, index):
+    def pop(self, index):
         if self.head_node is None:
             return None
-        current_node = self.head_node
-        previous_node = None
-        while current_node.next_node is not None:
-            previous_node = current_node
-            current_node = current_node.next_node
-        if previous_node is None:
+        popped_value = self.tail_node.value
+
+        if self.head_node == self.tail_node:
             self.head_node = None
             self.tail_node = None
         else:
-            previous_node.next_node = None
-            self.tail_node = previous_node
+            current_node = self.head_node
+            while current_node.next_node != self.tail_node:
+                current_node = current_node.next_node
+            current_node.next_node = None
+            self.tail_node = current_node
+
         self.size -= 1
-        return current_node.value
+        return popped_value
 
     # If value is in the list
     def contains(self, value):
