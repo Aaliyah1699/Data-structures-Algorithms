@@ -22,3 +22,9 @@ class Tree:
             node.left = build_node(arr, start, mid - 1)
             node.right = build_node(arr, mid + 1, end)
             return node
+        
+        # Sort the array
+        values.sort()
+
+        # Call the recursive function
+        return build_node(values, 0, len(values) - 1)
