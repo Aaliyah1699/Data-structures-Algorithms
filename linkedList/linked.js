@@ -39,4 +39,18 @@ class LinkedList {
     }
     this.size++;
   }
+
+  // Insert node at a given index
+  at(index) {
+    if (index < 0 || index >= this.size) {
+      return null;
+    }
+    let currentNode = this.head;
+    let currentIndex = 0;
+    while (currentIndex < index) {
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+    }
+    return currentNode;
+  }
 }
