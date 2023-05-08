@@ -9,7 +9,7 @@ class Node:
 class LinkedList:
     def __init__(self):
         self.head_node_node = None
-        self.tail = None
+        self.tail_node = None
         self.size = 0
 
     # Add node to the end of the list
@@ -17,10 +17,10 @@ class LinkedList:
         new_node = Node(value)
         if self.head_node_node is None:
             self.head_node = new_node
-            self.tail = self.head_node
+            self.tail_node = self.head_node
         else:
-            self.tail.next_node = new_node
-            self.tail = self.tail.next_node
+            self.tail_node.next_node = new_node
+            self.tail_node = self.tail_node.next_node
         self.size += 1
 
     # Add node to the beginning of the list
@@ -28,7 +28,7 @@ class LinkedList:
         new_node = Node(value)
         if self.head_node is None:
             self.head_node = new_node
-            self.tail = self.head_node
+            self.tail_node = self.head_node
         else:
             new_node.next_node = self.head_node
             self.head_node = new_node
@@ -44,7 +44,7 @@ class LinkedList:
 
     # Return last node of list
     def tail(self):
-        return self.tail
+        return self.tail_node
 
     # Return node at index
     def at(self, index):
@@ -68,10 +68,10 @@ class LinkedList:
             current_node = current_node.next_node
         if previous_node is None:
             self.head_node = None
-            self.tail = None
+            self.tail_node = None
         else:
             previous_node.next_node = None
-            self.tail = previous_node
+            self.tail_node = previous_node
         self.size -= 1
         return current_node.value
 
@@ -133,7 +133,7 @@ class LinkedList:
         if index == 0:
             self.head_node = self.head_node.next_node
             self.size == 1
-            self.tail = None
+            self.tail_node = None
         else:
             current_node = self.head_node
             previous_node = None
@@ -144,7 +144,7 @@ class LinkedList:
                 current_index += 1
             previous_node.next_node = current_node.next_node
             if index == self.size - 1:
-                self.tail = previous_node
+                self.tail_node = previous_node
             self.size -= 1
 
 # Test
