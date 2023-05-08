@@ -40,3 +40,7 @@ class LinkedList:
     # Return first node of list
     def head(self):
         return self.head
+    
+    # Return last node of list
+    def tail(self):
+        return self.tail
