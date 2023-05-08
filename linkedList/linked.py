@@ -184,9 +184,9 @@ print("Index of 20:", list.find(20))          # Output: 2
 print("LinkedList:", list.to_string())         # Output: (2) -> (5) -> (10) -> (20) -> null
 
 # Test insertAt
-list.insertAt(15, 2)
+list.insert_at(15, 2)
 print("LinkedList after insertion:", list.to_string())   # Output: (2) -> (5) -> (15) -> (10) -> (20) -> null
 
 # Test removeAt
-list.removeAt(3)
+list.remove_at(3)
 print("LinkedList after removal:", list.to_string())     # Output: (2) -> (5) -> (15) -> (20) -> null
