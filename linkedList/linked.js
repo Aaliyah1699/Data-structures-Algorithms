@@ -165,5 +165,6 @@ class LinkedList {
         this.tail = previousNode;
       }
     }
+    this.size--;
   }
 }
