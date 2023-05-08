@@ -93,4 +93,11 @@ class LinkedList:
             current_node = current_node.next_node
             current_index += 1
         return None
-    
+    # Return string representation of list
+    def to_string(self):
+        string = ""
+        current_node = self.head
+        while current_node is not None:
+            string += str(current_node.value) + " "
+            current_node = current_node.next_node
+        return string
