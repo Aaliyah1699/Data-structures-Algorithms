@@ -141,6 +141,8 @@ class LinkedList:
             previous_node = None
             current_index = 0
             while current_index < index:
+                if current_index == index - 1:
+                    return
                 previous_node = current_node
                 current_node = current_node.next_node
                 current_index += 1
