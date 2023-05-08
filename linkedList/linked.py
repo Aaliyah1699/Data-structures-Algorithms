@@ -44,3 +44,15 @@ class LinkedList:
     # Return last node of list
     def tail(self):
         return self.tail
+    
+    # Return node at index
+    def at(self, index):
+        if index < 0 or index >= self.size:
+            return None
+        current_node = self.head
+        current_index = 0
+        while current_index < index:
+            current_node = current_node.next_node
+            current_index += 1
+        return current_node
+            
