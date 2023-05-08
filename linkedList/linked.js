@@ -87,4 +87,18 @@ class LinkedList {
     }
     return false;
   }
+
+  // find the index of a given value
+  find(value) {
+    let currentNode = this.head;
+    let currentIndex = 0;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return currentIndex;
+      }
+      currentNode = currentNode.nextNode;
+      currentIndex++;
+    }
+    return null;
+  }
 }
