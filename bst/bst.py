@@ -127,29 +127,29 @@ class Tree:
             # Call level order helper with provided function
             self.level_order_helper(self.root, func)
 
-        def level_order_traversal(self, node, visit):
-            # Base case
-            if node is None:
-                return
+    def level_order_traversal(self, node, visit):
+        # Base case
+        if node is None:
+            return
 
-            # Create queue and enqueue root node
-            queue = [node]
+        # Create queue and enqueue root node
+        queue = [node]
 
-            # Loop until queue is empty
-            while len(queue) > 0:
-                # Dequeue front node
-                current_node = queue.pop(0)
+        # Loop until queue is empty
+        while len(queue) > 0:
+            # Dequeue front node
+            current_node = queue.pop(0)
 
-                # Visit current  node
-                visit(current_node)
+            # Visit current  node
+            visit(current_node)
 
-                # Enqueue left child
-                if current_node.left is not None:
-                    queue.append(current_node.left)
+            # Enqueue left child
+            if current_node.left is not None:
+                queue.append(current_node.left)
 
-                # Enqueue right child
-                if current_node.right is not None:
-                    queue.append(current_node.right)
+            # Enqueue right child
+            if current_node.right is not None:
+                queue.append(current_node.right)
 
     def inorder(self, func=None):
         # Call the recursive function to traverse the tree
@@ -215,24 +215,29 @@ class Tree:
         return left + right + [node.data]
 
     def height(self, node=None):
-        # If node isn't specified, use root
-        if node is None:
-            node = self.root
-
-        # Base case
-        if node is None:
+        # check if tree is empty
+        if self.root is None:
             return -1
 
-        # Recursively calculate height of left and right subtrees
-        left_height = self.height(node.left)
-        right_height = self.height(node.right)
+        # Create queue to perform level order traversal
+        queue = [(self.root, 0)]
+        max_height = 0
 
-        # Return max height of subtree l & r
-        left_height = self.height(node.left)
-        right_height = self.height(node.right)
+        while queue:
+            node, level = queue.pop(0)
 
-        # Return max height of subtree l & r
-        return max(left_height, right_height) + 1
+            # Update max height
+            max_height = max(max_height, level)
+
+            # Enqueue left child
+            if node.left:
+                queue.append((node.left, level + 1))
+
+            # Enqueue right child
+            if node.right:
+                queue.append((node.right, level + 1))
+
+        return max_height
 
     def depth(self, node):
         # Base case
@@ -282,7 +287,7 @@ def generate_random_array(size):
 
 # Driver script
 def main():
-    sys.setrecursionlimit(10**6)
+    sys.setrecursionlimit(1000)
 
     # Create a binary search tree from an array of random numbers
     random_array = generate_random_array(10)
