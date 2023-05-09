@@ -177,3 +177,23 @@ class Tree:
                     func(node)
 
             return left + right + [node.data]
+        
+        def height(self, node=None):
+           # If node isn't specified, use root
+            if node is None:
+                node = self.root
+
+            # Base case
+            if node is None:
+                return -1
+            
+            # Recursively calculate height of left and right subtrees
+            left_height = self.height(node.left)
+            right_height = self.height(node.right)
+
+            # Return max height of subtree l & r
+            left_height = self.height(node.left)
+            right_height = self.height(node.right)
+
+            # Return max height of subtree l & r
+            return max(left_height, right_height) + 1
