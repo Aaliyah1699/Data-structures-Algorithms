@@ -98,4 +98,19 @@ class Tree:
             # Call the recursive function to find the value
             return self.find_helper(self.root, value)
         
-        
+        def find_helper(self, node, value):
+            # Base case
+            if not node:
+                return None
+
+            # If value is smaller than node, search in left subtree
+            if value < node.data:
+                return self.find_helper(node.left, value)
+
+            # If value is greater than node, search in right subtree
+            elif value > node.data:
+                return self.find_helper(node.right, value)
+
+            # If value is same as node, return node
+            else:
+                return node
