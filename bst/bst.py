@@ -15,262 +15,263 @@ class Tree:
         self.root = self.build_tree(sorted(set(array)))
 
         # Build tree
-        def build_tree(self, array):
-            # Base case
-            if not array:
-                return None
 
-            # Find middle of array and make it root
-            mid = len(array) // 2
-            root = Node(array[mid])
+    def build_tree(self, array):
+        # Base case
+        if not array:
+            return None
 
-            # Recursively build left and right subtrees
-            root.left = self.build_tree(array[:mid])
-            root.right = self.build_tree(array[mid + 1 :])
+        # Find middle of array and make it root
+        mid = len(array) // 2
+        root = Node(array[mid])
 
-            return root
+        # Recursively build left and right subtrees
+        root.left = self.build_tree(array[:mid])
+        root.right = self.build_tree(array[mid + 1 :])
 
-        def insert(self, value):
-            # Call the recursive function to insert the value
-            self.root = self.insert_helper(self.root, value)
+        return root
 
-        def insert_helper(self, node, value):
-            # Base case
-            if not node:
-                return Node(value)
+    def insert(self, value):
+        # Call the recursive function to insert the value
+        self.root = self.insert_helper(self.root, value)
 
-            # If value is smaller than node, insert in left subtree
-            if value < node.data:
-                node.left = self.insert_helper(node.left, value)
+    def insert_helper(self, node, value):
+        # Base case
+        if not node:
+            return Node(value)
 
-            # If value is greater than node, insert in right subtree
-            else:
-                node.right = self.insert_helper(node.right, value)
+        # If value is smaller than node, insert in left subtree
+        if value < node.data:
+            node.left = self.insert_helper(node.left, value)
 
+        # If value is greater than node, insert in right subtree
+        else:
+            node.right = self.insert_helper(node.right, value)
+
+        return node
+
+    def delete(self, value):
+        # Call the recursive function to delete the value
+        self.root = self.delete_helper(self.root, value)
+
+    def delete_helper(self, node, value):
+        # Base case
+        if not node:
             return node
 
-        def delete(self, value):
-            # Call the recursive function to delete the value
-            self.root = self.delete_helper(self.root, value)
+        # If value is smaller than node, delete from left subtree
+        if value < node.data:
+            node.left = self.delete_helper(node.left, value)
 
-        def delete_helper(self, node, value):
-            # Base case
-            if not node:
-                return node
+        # If value is greater than node, delete from right subtree
+        elif value > node.data:
+            node.right = self.delete_helper(node.right, value)
 
-            # If value is smaller than node, delete from left subtree
-            if value < node.data:
-                node.left = self.delete_helper(node.left, value)
+        # If value is same as node, delete the node
+        else:
+            # If node has one or no children
+            if node.left is None:
+                return node.right
 
-            # If value is greater than node, delete from right subtree
-            elif value > node.data:
-                node.right = self.delete_helper(node.right, value)
+            elif node.right is None:
+                return node.left
 
-            # If value is same as node, delete the node
-            else:
-                # If node has one or no children
-                if node.left is None:
-                    return node.right
+            # If node has two children
+            # Get in order successor
+            min_right = self.get_min_value_node(node.right)
 
-                elif node.right is None:
-                    return node.left
+            # Copy in order successor's content to node
+            node.data = min_right.data
 
-                # If node has two children
-                # Get in order successor
-                min_right = self.get_min_value_node(node.right)
+            # Delete in order successor
+            node.right = self.delete_helper(node.right, min_right.data)
 
-                # Copy in order successor's content to node
-                node.data = min_right.data
+        return node
 
-                # Delete in order successor
-                node.right = self.delete_helper(node.right, min_right.data)
+    def find_min(self, node):
+        # Helper function to find minimum value in subtree
+        while node.left:
+            node = node.left
+        return node.data
 
+    def find(self, value):
+        # Call the recursive function to find the value
+        return self.find_helper(self.root, value)
+
+    def find_helper(self, node, value):
+        # Base case
+        if node is None or node.data == value:
             return node
+        # If value is smaller than node, search in left subtree
+        if value < node.data:
+            return self.find_helper(node.left, value)
 
-        def find_min(self, node):
-            # Helper function to find minimum value in subtree
-            while node.left:
-                node = node.left
-            return node.data
+        return self.find_helper(node.right, value)
 
-        def find(self, value):
-            # Call the recursive function to find the value
-            return self.find_helper(self.root, value)
+    def level_order(self, func=None):
+        # Check if func is provided
+        if func is None:
+            values = []
 
-        def find_helper(self, node, value):
-            # Base case
-            if node is None or node.data == value:
-                return node
-            # If value is smaller than node, search in left subtree
-            if value < node.data:
-                return self.find_helper(node.left, value)
+            # Helper to visit node and append value to list
+            def visit(node):
+                values.append(node.data)
 
-            return self.find_helper(node.right, value)
-        
-        def level_order(self, func=None):
-            # Check if func is provided
-            if func is None:
-                values = []
+            # Call level order helper with visit function
+            self.level_order_helper(self.root, visit)
 
-                # Helper to visit node and append value to list
-                def visit(node):
-                    values.append(node.data)
-                
-                # Call level order helper with visit function
-                self.level_order_helper(self.root, visit)
+            return values
 
-                return values
-            
-            else:
-                # Call level order helper with provided function
-                self.level_order_helper(self.root, func)
+        else:
+            # Call level order helper with provided function
+            self.level_order_helper(self.root, func)
 
-            def level_order_traversal(self, node, visit):
-                # Base case
-                if node is None:
-                    return
-
-                # Create queue and enqueue root node
-                queue = [node]
-
-                # Loop until queue is empty
-                while len(queue) > 0:
-                    # Dequeue front node
-                    current_node = queue.pop(0)
-
-                    # Visit current  node
-                    visit(current_node)
-
-                    # Enqueue left child
-                    if current_node.left is not None:
-                        queue.append(current_node.left)
-
-                    # Enqueue right child
-                    if current_node.right is not None:
-                        queue.append(current_node.right)
-
-        def inorder(self, func=None):
-            # Call the recursive function to traverse the tree
-            return self.inorder_helper(self.root, func)
-
-        def inorder_helper(self, node, func):
-            # Base case
-            if not node:
-                return []
-
-            # Recursively traverse left subtree
-            left = self.inorder_helper(node.left, func)
-
-            # Call function on node data
-            if func is not None:
-                func(node)
-
-            # Recursively traverse right subtree
-            right = self.inorder_helper(node.right, func)
-
-            return left + [node.data] + right
-
-        def preorder(self, func=None):
-            # Call the recursive function to traverse the tree
-            return self.preorder_helper(self.root, func)
-
-        def preorder_helper(self, node, func):
-            # Base case
-            if not node:
-                return []
-
-            # Call function on node data
-            if func is not None:
-                func(node)
-
-            # Recursively traverse left subtree
-            left = self.preorder_helper(node.left, func)
-
-            # Recursively traverse right subtree
-            right = self.preorder_helper(node.right, func)
-
-            return [node.data] + left + right
-
-        def postorder(self, func=None):
-            # Call the recursive function to traverse the tree
-            return self.postorder_helper(self.root, func)
-
-        def postorder_helper(self, node, func):
-            # Base case
-            if not node:
-                return []
-
-            # Recursively traverse left subtree
-            left = self.postorder_helper(node.left, func)
-
-            # Recursively traverse right subtree
-            right = self.postorder_helper(node.right, func)
-
-            # Call function on node data
-            if func is not None:
-                func(node)
-
-            return left + right + [node.data]
-
-        def height(self, node=None):
-            # If node isn't specified, use root
-            if node is None:
-                node = self.root
-
+        def level_order_traversal(self, node, visit):
             # Base case
             if node is None:
-                return -1
+                return
 
-            # Recursively calculate height of left and right subtrees
-            left_height = self.height(node.left)
-            right_height = self.height(node.right)
+            # Create queue and enqueue root node
+            queue = [node]
 
-            # Return max height of subtree l & r
-            left_height = self.height(node.left)
-            right_height = self.height(node.right)
+            # Loop until queue is empty
+            while len(queue) > 0:
+                # Dequeue front node
+                current_node = queue.pop(0)
 
-            # Return max height of subtree l & r
-            return max(left_height, right_height) + 1
+                # Visit current  node
+                visit(current_node)
 
-        def depth(self, node):
-            # Base case
-            if node is None:
-                return -1
+                # Enqueue left child
+                if current_node.left is not None:
+                    queue.append(current_node.left)
 
-            # Recursively calculate depth of parent of node
-            parent_depth = self.depth(node.parent)
+                # Enqueue right child
+                if current_node.right is not None:
+                    queue.append(current_node.right)
 
-            # Return depth of node
-            return parent_depth + 1
+    def inorder(self, func=None):
+        # Call the recursive function to traverse the tree
+        return self.inorder_helper(self.root, func)
 
-        def is_balanced(self):
-            # Return True if tree is balanced
-            return self.is_balanced_helper(self.root)
+    def inorder_helper(self, node, func):
+        # Base case
+        if not node:
+            return []
 
-        def is_balanced_helper(self, node):
-            # Base case
-            if node is None:
-                return True
+        # Recursively traverse left subtree
+        left = self.inorder_helper(node.left, func)
 
-            # Calculate height of left and right subtrees
-            left_height = self.height(node.left)
-            right_height = self.height(node.right)
+        # Call function on node data
+        if func is not None:
+            func(node)
 
-            # Check if difference in height i greater than 1
-            if abs(left_height - right_height) > 1:
-                return False
+        # Recursively traverse right subtree
+        right = self.inorder_helper(node.right, func)
 
-            # Recursively check if left and right subtrees are balanced
-            return self.is_balanced_helper(node.left) and self.is_balanced_helper(
-                node.right
-            )
+        return left + [node.data] + right
 
-        def rebalance(self):
-            # Get sorted list of values in tree
-            values = self.inorder()
+    def preorder(self, func=None):
+        # Call the recursive function to traverse the tree
+        return self.preorder_helper(self.root, func)
 
-            # Rebuild tree
-            self.root = self.build_tree(values)
+    def preorder_helper(self, node, func):
+        # Base case
+        if not node:
+            return []
+
+        # Call function on node data
+        if func is not None:
+            func(node)
+
+        # Recursively traverse left subtree
+        left = self.preorder_helper(node.left, func)
+
+        # Recursively traverse right subtree
+        right = self.preorder_helper(node.right, func)
+
+        return [node.data] + left + right
+
+    def postorder(self, func=None):
+        # Call the recursive function to traverse the tree
+        return self.postorder_helper(self.root, func)
+
+    def postorder_helper(self, node, func):
+        # Base case
+        if not node:
+            return []
+
+        # Recursively traverse left subtree
+        left = self.postorder_helper(node.left, func)
+
+        # Recursively traverse right subtree
+        right = self.postorder_helper(node.right, func)
+
+        # Call function on node data
+        if func is not None:
+            func(node)
+
+        return left + right + [node.data]
+
+    def height(self, node=None):
+        # If node isn't specified, use root
+        if node is None:
+            node = self.root
+
+        # Base case
+        if node is None:
+            return -1
+
+        # Recursively calculate height of left and right subtrees
+        left_height = self.height(node.left)
+        right_height = self.height(node.right)
+
+        # Return max height of subtree l & r
+        left_height = self.height(node.left)
+        right_height = self.height(node.right)
+
+        # Return max height of subtree l & r
+        return max(left_height, right_height) + 1
+
+    def depth(self, node):
+        # Base case
+        if node is None:
+            return -1
+
+        # Recursively calculate depth of parent of node
+        parent_depth = self.depth(node.parent)
+
+        # Return depth of node
+        return parent_depth + 1
+
+    def is_balanced(self):
+        # Return True if tree is balanced
+        return self.is_balanced_helper(self.root)
+
+    def is_balanced_helper(self, node):
+        # Base case
+        if node is None:
+            return True
+
+        # Calculate height of left and right subtrees
+        left_height = self.height(node.left)
+        right_height = self.height(node.right)
+
+        # Check if difference in height i greater than 1
+        if abs(left_height - right_height) > 1:
+            return False
+
+        # Recursively check if left and right subtrees are balanced
+        return self.is_balanced_helper(node.left) and self.is_balanced_helper(
+            node.right
+        )
+
+    def rebalance(self):
+        # Get sorted list of values in tree
+        values = self.inorder()
+
+        # Rebuild tree
+        self.root = self.build_tree(values)
 
 
 # Function to generate an array of random numbers
