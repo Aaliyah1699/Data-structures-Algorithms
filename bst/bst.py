@@ -54,4 +54,37 @@ class Tree:
             # Call the recursive function to delete the value
             self.root = self.delete_helper(self.root, value)
 
+        def delete_helper(self, node, value):
+            # Base case
+            if not node:
+                return node
+
+            # If value is smaller than node, delete from left subtree
+            if value < node.data:
+                node.left = self.delete_helper(node.left, value)
+
+            # If value is greater than node, delete from right subtree
+            elif value > node.data:
+                node.right = self.delete_helper(node.right, value)
+
+            # If value is same as node, delete the node
+            else:
+                # If node has one or no children
+                if node.left is None:
+                    return node.right
+            
+                elif node.right is None:
+                    return node.left
+
+                # If node has two children
+                # Get in order successor
+                min_right = self.get_min_value_node(node.right)
+
+                # Copy in order successor's content to node
+                node.data = min_right.data
+
+                # Delete in order successor
+                node.right = self.delete_helper(node.right, min_right.data)
+
+            return node
         
