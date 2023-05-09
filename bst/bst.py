@@ -1,4 +1,5 @@
 import random
+import sys
 
 
 # Node class
@@ -281,6 +282,8 @@ def generate_random_array(size):
 
 # Driver script
 def main():
+    sys.setrecursionlimit(10**6)
+
     # Create a binary search tree from an array of random numbers
     random_array = generate_random_array(10)
     tree = Tree(random_array)
