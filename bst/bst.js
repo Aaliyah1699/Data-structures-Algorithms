@@ -6,3 +6,10 @@ class Node {
     this.right = null;
   }
 }
+
+// Tree class
+class Tree {
+  constructor(array) {
+    this.root = this.buildTree([...new Set(array)].sort());
+  }
+}
