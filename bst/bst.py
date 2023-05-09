@@ -94,4 +94,8 @@ class Tree:
                 node = node.left
             return node.data
         
+        def find(self, value):
+            # Call the recursive function to find the value
+            return self.find_helper(self.root, value)
+        
         
