@@ -109,18 +109,22 @@ class Tree:
 
         return self.find_helper(node.right, value)
 
-    def level_order(self, func=None):
+    def level_order(self, func=None, print_level=False):
         # Check if func is provided
         if func is None:
             values = []
+            levels = [] if print_level else None
 
-            # Helper to visit node and append value to list
-            def visit(node):
+            # Helper to visit node and append value and level to list
+            def visit(node, level):
                 values.append(node.data)
+                if print_level:
+                    levels.append(level)
 
             # Call level order helper with visit function
             self.level_order_helper(self.root, visit)
-
+            if print_level:
+                return values, levels
             return values
 
         else:
