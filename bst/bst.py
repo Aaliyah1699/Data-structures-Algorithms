@@ -125,6 +125,30 @@ class Tree:
                 # Call level order helper with provided function
                 self.level_order_helper(self.root, func)
 
+            def level_order_traversal(self, node, visit):
+                # Base case
+                if node is None:
+                    return
+
+                # Create queue and enqueue root node
+                queue = [node]
+
+                # Loop until queue is empty
+                while len(queue) > 0:
+                    # Dequeue front node
+                    current_node = queue.pop(0)
+
+                    # Visit current  node
+                    visit(current_node)
+
+                    # Enqueue left child
+                    if current_node.left is not None:
+                        queue.append(current_node.left)
+
+                    # Enqueue right child
+                    if current_node.right is not None:
+                        queue.append(current_node.right)
+
         def inorder(self, func=None):
             # Call the recursive function to traverse the tree
             return self.inorder_helper(self.root, func)
