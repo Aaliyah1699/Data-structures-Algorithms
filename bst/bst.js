@@ -94,10 +94,11 @@ class Tree {
 
   // find min
   findMin(node) {
-    let current = node;
-    while (current && current.left) {
-      current = current.left;
-    }
-    return current;
+    // Helper function to find the minimum value in a subtree
+        while (node.left) {
+            node = node.left;
+        }
+        return node.data;
   }
-}
+
+  // find 
