@@ -209,4 +209,24 @@ class Tree:
             # Return depth of node
             return parent_depth + 1
         
+        def is_balanced(self):
+            # Return True if tree is balanced
+            return self.is_balanced_helper(self.root)
+        
+        def is_balanced_helper(self, node):
+            # Base case
+            if node is None:
+                return True
+
+            # Calculate height of left and right subtrees
+            left_height = self.height(node.left)
+            right_height = self.height(node.right)
+
+            # Check if difference in height i greater than 1
+            if abs(left_height - right_height) > 1:
+                return False
+            
+            # Recursively check if left and right subtrees are balanced
+            return self.is_balanced_helper(node.left) and self.is_balanced_helper(node.right)
+        
         
