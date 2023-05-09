@@ -49,3 +49,9 @@ class Tree:
                 node.right = self.insert_helper(node.right, value)
 
             return node
+        
+        def delete(self, value):
+            # Call the recursive function to delete the value
+            self.root = self.delete_helper(self.root, value)
+
+        
