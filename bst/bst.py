@@ -289,7 +289,7 @@ def main():
 
     # Print elements in level order
     print("Level order traversal:")
-    tree.levelOrder(lambda node: print(node.data), True)
+    tree.level_order(lambda node: print(node.data), True)
 
     # Print elements in preorder
     print("Preorder traversal:")
@@ -319,7 +319,7 @@ def main():
 
     # Print elements in level order
     print("Level order traversal after rebalancing:")
-    tree.levelOrder(lambda node: print(node.data), True)
+    tree.level_order(lambda node: print(node.data), True)
 
     # Print elements in preorder
     print("Preorder traversal after rebalancing:")
