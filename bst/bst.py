@@ -136,3 +136,23 @@ class Tree:
 
             return left + [node.data] + right
 
+        def preorder(self, func=None):
+            # Call the recursive function to traverse the tree
+            return self.preorder_helper(self.root, func)
+        
+        def preorder_helper(self, node, func):
+            # Base case
+            if not node:
+                return []
+
+            # Call function on node data
+            if func is not None:
+                    func(node)
+
+            # Recursively traverse left subtree
+            left =  self.preorder_helper(node.left, func)
+
+            # Recursively traverse right subtree
+            right = self.preorder_helper(node.right, func)
+
+            return [node.data] + left + right
