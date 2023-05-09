@@ -100,20 +100,14 @@ class Tree:
         
         def find_helper(self, node, value):
             # Base case
-            if not node:
-                return None
-
+            if node is None or node.data == value:
+                return node
             # If value is smaller than node, search in left subtree
             if value < node.data:
                 return self.find_helper(node.left, value)
 
-            # If value is greater than node, search in right subtree
-            elif value > node.data:
-                return self.find_helper(node.right, value)
+            return self.find_helper(node.right, value)
 
-            # If value is same as node, return node
-            else:
-                return node
             
         def inorder(self, func=None):
             # Call the recursive function to traverse the tree
@@ -236,4 +230,3 @@ class Tree:
             # Rebuild tree
             self.root = self.build_tree(values)
 
-            
