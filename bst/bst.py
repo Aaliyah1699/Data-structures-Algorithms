@@ -229,4 +229,11 @@ class Tree:
             # Recursively check if left and right subtrees are balanced
             return self.is_balanced_helper(node.left) and self.is_balanced_helper(node.right)
         
-        
+        def rebalance(self):
+            # Get sorted list of values in tree
+            values = self.inorder()
+
+            # Rebuild tree
+            self.root = self.build_tree(values)
+
+            
