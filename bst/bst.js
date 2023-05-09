@@ -91,4 +91,13 @@ class Tree {
     }
     return node;
   }
+
+  // find min
+  findMin(node) {
+    let current = node;
+    while (current && current.left) {
+      current = current.left;
+    }
+    return current;
+  }
 }
