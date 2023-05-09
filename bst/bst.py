@@ -197,3 +197,16 @@ class Tree:
 
             # Return max height of subtree l & r
             return max(left_height, right_height) + 1
+        
+        def depth(self, node):
+            # Base case
+            if node is None:
+                return -1
+
+            # Recursively calculate depth of parent of node
+            parent_depth = self.depth(node.parent)
+
+            # Return depth of node
+            return parent_depth + 1
+        
+        
