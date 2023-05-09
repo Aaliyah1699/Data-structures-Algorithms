@@ -114,3 +114,25 @@ class Tree:
             # If value is same as node, return node
             else:
                 return node
+            
+        def inorder(self, func=None):
+            # Call the recursive function to traverse the tree
+            return self.inorder_helper(self.root, func)
+        
+        def inorder_helper(self, node, func):
+            # Base case
+            if not node:
+                return []
+
+            # Recursively traverse left subtree
+            left =  self.inorder_helper(node.left, func)
+
+            # Call function on node data
+            if func is not None:
+                    func(node)
+
+            # Recursively traverse right subtree
+            right = self.inorder_helper(node.right, func)
+
+            return left + [node.data] + right
+
