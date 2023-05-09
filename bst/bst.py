@@ -156,3 +156,24 @@ class Tree:
             right = self.preorder_helper(node.right, func)
 
             return [node.data] + left + right
+        
+        def postorder(self, func=None):
+            # Call the recursive function to traverse the tree
+            return self.postorder_helper(self.root, func)
+        
+        def postorder_helper(self, node, func):
+            # Base case
+            if not node:
+                return []
+
+            # Recursively traverse left subtree
+            left =  self.postorder_helper(node.left, func)
+
+            # Recursively traverse right subtree
+            right = self.postorder_helper(node.right, func)
+
+            # Call function on node data
+            if func is not None:
+                    func(node)
+
+            return left + right + [node.data]
