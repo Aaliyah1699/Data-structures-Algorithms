@@ -122,14 +122,14 @@ class Tree:
                     levels.append(level)
 
             # Call level order helper with visit function
-            self.level_order_helper(self.root, visit)
+            self.level_order_traversal()(self.root, visit)
             if print_level:
                 return values, levels
             return values
 
         else:
             # Call level order helper with provided function
-            self.level_order_helper(self.root, func)
+            self.level_order_traversal()(self.root, func)
 
     def level_order_traversal(self, node, visit):
         # Base case
