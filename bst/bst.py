@@ -88,3 +88,10 @@ class Tree:
 
             return node
         
+        def find_min(self, node):
+            # Helper function to find minimum value in subtree
+            while node.left:
+                node = node.left
+            return node.data
+        
+        
