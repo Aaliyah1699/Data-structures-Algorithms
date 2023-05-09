@@ -1,4 +1,6 @@
 import random
+
+
 # Node class
 class Node:
     def __init__(self, data):
@@ -46,7 +48,7 @@ class Tree:
                 node.right = self.insert_helper(node.right, value)
 
             return node
-        
+
         def delete(self, value):
             # Call the recursive function to delete the value
             self.root = self.delete_helper(self.root, value)
@@ -69,7 +71,7 @@ class Tree:
                 # If node has one or no children
                 if node.left is None:
                     return node.right
-            
+
                 elif node.right is None:
                     return node.left
 
@@ -84,17 +86,17 @@ class Tree:
                 node.right = self.delete_helper(node.right, min_right.data)
 
             return node
-        
+
         def find_min(self, node):
             # Helper function to find minimum value in subtree
             while node.left:
                 node = node.left
             return node.data
-        
+
         def find(self, value):
             # Call the recursive function to find the value
             return self.find_helper(self.root, value)
-        
+
         def find_helper(self, node, value):
             # Base case
             if node is None or node.data == value:
@@ -104,23 +106,40 @@ class Tree:
                 return self.find_helper(node.left, value)
 
             return self.find_helper(node.right, value)
+        
+        def level_order(self, func=None):
+            # Check if func is provided
+            if func is None:
+                values = []
 
+                # Helper to visit node and append value to list
+                def visit(node):
+                    values.append(node.data)
+                
+                # Call level order helper with visit function
+                self.level_order_helper(self.root, visit)
+
+                return values
             
+            else:
+                # Call level order helper with provided function
+                self.level_order_helper(self.root, func)
+
         def inorder(self, func=None):
             # Call the recursive function to traverse the tree
             return self.inorder_helper(self.root, func)
-        
+
         def inorder_helper(self, node, func):
             # Base case
             if not node:
                 return []
 
             # Recursively traverse left subtree
-            left =  self.inorder_helper(node.left, func)
+            left = self.inorder_helper(node.left, func)
 
             # Call function on node data
             if func is not None:
-                    func(node)
+                func(node)
 
             # Recursively traverse right subtree
             right = self.inorder_helper(node.right, func)
@@ -130,7 +149,7 @@ class Tree:
         def preorder(self, func=None):
             # Call the recursive function to traverse the tree
             return self.preorder_helper(self.root, func)
-        
+
         def preorder_helper(self, node, func):
             # Base case
             if not node:
@@ -138,46 +157,46 @@ class Tree:
 
             # Call function on node data
             if func is not None:
-                    func(node)
+                func(node)
 
             # Recursively traverse left subtree
-            left =  self.preorder_helper(node.left, func)
+            left = self.preorder_helper(node.left, func)
 
             # Recursively traverse right subtree
             right = self.preorder_helper(node.right, func)
 
             return [node.data] + left + right
-        
+
         def postorder(self, func=None):
             # Call the recursive function to traverse the tree
             return self.postorder_helper(self.root, func)
-        
+
         def postorder_helper(self, node, func):
             # Base case
             if not node:
                 return []
 
             # Recursively traverse left subtree
-            left =  self.postorder_helper(node.left, func)
+            left = self.postorder_helper(node.left, func)
 
             # Recursively traverse right subtree
             right = self.postorder_helper(node.right, func)
 
             # Call function on node data
             if func is not None:
-                    func(node)
+                func(node)
 
             return left + right + [node.data]
-        
+
         def height(self, node=None):
-           # If node isn't specified, use root
+            # If node isn't specified, use root
             if node is None:
                 node = self.root
 
             # Base case
             if node is None:
                 return -1
-            
+
             # Recursively calculate height of left and right subtrees
             left_height = self.height(node.left)
             right_height = self.height(node.right)
@@ -188,7 +207,7 @@ class Tree:
 
             # Return max height of subtree l & r
             return max(left_height, right_height) + 1
-        
+
         def depth(self, node):
             # Base case
             if node is None:
@@ -199,11 +218,11 @@ class Tree:
 
             # Return depth of node
             return parent_depth + 1
-        
+
         def is_balanced(self):
             # Return True if tree is balanced
             return self.is_balanced_helper(self.root)
-        
+
         def is_balanced_helper(self, node):
             # Base case
             if node is None:
@@ -216,10 +235,12 @@ class Tree:
             # Check if difference in height i greater than 1
             if abs(left_height - right_height) > 1:
                 return False
-            
+
             # Recursively check if left and right subtrees are balanced
-            return self.is_balanced_helper(node.left) and self.is_balanced_helper(node.right)
-        
+            return self.is_balanced_helper(node.left) and self.is_balanced_helper(
+                node.right
+            )
+
         def rebalance(self):
             # Get sorted list of values in tree
             values = self.inorder()
@@ -231,6 +252,7 @@ class Tree:
 # Function to generate an array of random numbers
 def generate_random_array(size):
     return [random.randint(1, 100) for _ in range(size)]
+
 
 # Driver script
 def main():
