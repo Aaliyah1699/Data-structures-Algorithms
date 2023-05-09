@@ -12,5 +12,8 @@ class Tree:
         self.root = self.build_tree(values)
 
     def build_tree(self, array):
-    
+        # Initialize tree with array and set root
+        self.root = self.build_tree(sorted(set(array)))
+
+        
         
