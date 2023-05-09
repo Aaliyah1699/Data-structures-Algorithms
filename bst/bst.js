@@ -95,10 +95,28 @@ class Tree {
   // find min
   findMin(node) {
     // Helper function to find the minimum value in a subtree
-        while (node.left) {
-            node = node.left;
-        }
-        return node.data;
+    while (node.left) {
+      node = node.left;
+    }
+    return node.data;
   }
 
-  // find 
+  // find node of given value
+  find(value) {
+    // Call recursive function to find value
+    return this.findHelper(this.root, value);
+  }
+
+  findHelper(node, value) {
+    // Base case
+    if (!node || node.data === value) {
+      return node;
+    }
+    // If value is smaller than node, search in the left subtree
+    if (value < node.data) {
+      return this.findHelper(node.left, value);
+    }
+
+    return this.findHelper(node.right, value);
+  }
+}
