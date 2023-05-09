@@ -1,3 +1,4 @@
+import random
 # Node class
 class Node:
     def __init__(self, data):
@@ -226,7 +227,6 @@ class Tree:
             # Rebuild tree
             self.root = self.build_tree(values)
 
-import random
 
 # Function to generate an array of random numbers
 def generate_random_array(size):
