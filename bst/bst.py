@@ -8,11 +8,7 @@ class Node:
 
 # Tree class
 class Tree:
-    def __init__(self, values):
-        self.root = self.build_tree(values)
-
-    def build_tree(self, array):
-        # Initialize tree with array and set root
+    def __init__(self, array):
         self.root = self.build_tree(sorted(set(array)))
 
         # Build tree
@@ -230,3 +226,68 @@ class Tree:
             # Rebuild tree
             self.root = self.build_tree(values)
 
+import random
+
+# Function to generate an array of random numbers
+def generate_random_array(size):
+    return [random.randint(1, 100) for _ in range(size)]
+
+# Driver script
+def main():
+    # Create a binary search tree from an array of random numbers
+    random_array = generate_random_array(10)
+    tree = Tree(random_array)
+
+    # Confirm that the tree is balanced
+    print("Is the tree balanced?", tree.is_balanced())
+
+    # Print elements in level order
+    print("Level order traversal:")
+    tree.levelOrder(lambda node: print(node.data), True)
+
+    # Print elements in preorder
+    print("Preorder traversal:")
+    tree.preorder(lambda node: print(node.data))
+
+    # Print elements in postorder
+    print("Postorder traversal:")
+    tree.postorder(lambda node: print(node.data))
+
+    # Print elements in inorder
+    print("Inorder traversal:")
+    tree.inorder(lambda node: print(node.data))
+
+    # Unbalance the tree by adding numbers > 100
+    unbalance_values = [101, 110, 120]
+    for value in unbalance_values:
+        tree.insert(value)
+
+    # Confirm that the tree is unbalanced
+    print("Is the tree unbalanced?", tree.is_balanced())
+
+    # Balance the tree by calling rebalance
+    tree.rebalance()
+
+    # Confirm that the tree is balanced
+    print("Is the tree balanced after rebalancing?", tree.is_balanced())
+
+    # Print elements in level order
+    print("Level order traversal after rebalancing:")
+    tree.levelOrder(lambda node: print(node.data), True)
+
+    # Print elements in preorder
+    print("Preorder traversal after rebalancing:")
+    tree.preorder(lambda node: print(node.data))
+
+    # Print elements in postorder
+    print("Postorder traversal after rebalancing:")
+    tree.postorder(lambda node: print(node.data))
+
+    # Print elements in inorder
+    print("Inorder traversal after rebalancing:")
+    tree.inorder(lambda node: print(node.data))
+
+
+# Run the driver script
+if __name__ == "__main__":
+    main()
