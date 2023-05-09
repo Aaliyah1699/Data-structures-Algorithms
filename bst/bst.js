@@ -52,4 +52,43 @@ class Tree {
     }
     return node;
   }
+  // delete node
+  delete(value) {
+    // Call recursive function to delete value
+    this.root = this.deleteHelper(this.root, value);
+  }
+
+  deleteHelper(node, value) {
+    // Base case
+    if (!node) {
+      return node;
+    }
+    // If value is smaller than node delete from left subtree
+    if (value < node.value) {
+      node.left = this.deleteHelper(node.left, value);
+    }
+    // If value is greater than node delete from right subtree
+    else if (value > node.value) {
+      node.right = this.deleteHelper(node.right, value);
+    }
+    // If value is equal to node, delete node
+    else {
+      // If node has one or no children
+      if (!node.left) {
+        return node.right;
+      } else if (!node.right) {
+        return node.left;
+      }
+      // If node has two children
+      // Get inorder successor
+      const minRight = this.findMin(node.right);
+
+      // Copy inorder successor's content to node
+      node.value = minRight.value;
+
+      // Delete inorder successor
+      node.right = this.deleteHelper(node.right, minRight.value);
+    }
+    return node;
+  }
 }
