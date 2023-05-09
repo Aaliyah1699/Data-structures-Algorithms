@@ -30,4 +30,26 @@ class Tree {
 
     return root;
   }
+
+  // insert node
+  insert(value) {
+    // Call recursive function to insert value
+    this.root = this.insertHelper(this.root, value);
+  }
+
+  insertHelper(node, value) {
+    // Base case
+    if (!node) {
+      return new Node(value);
+    }
+    // If value is less than node value, go left
+    if (value < node.value) {
+      node.left = this.insertHelper(node.left, value);
+    }
+    // If value is greater than node value, go right
+    else {
+      node.right = this.insertHelper(node.right, value);
+    }
+    return node;
+  }
 }
