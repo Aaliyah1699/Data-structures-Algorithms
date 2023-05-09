@@ -34,3 +34,18 @@ class Tree:
         def insert(self, value):
             # Call the recursive function to insert the value
             self.root = self.insert_helper(self.root, value)
+
+        def insert_helper(self, node, value):
+            # Base case
+            if not node:
+                return Node(value)
+
+            # If value is smaller than node, insert in left subtree
+            if value < node.data:
+                node.left = self.insert_helper(node.left, value)
+
+            # If value is greater than node, insert in right subtree
+            else:
+                node.right = self.insert_helper(node.right, value)
+
+            return node
